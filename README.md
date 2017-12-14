@@ -1,2 +1,0 @@
-# ICA_project
-WoW
