@@ -4,6 +4,7 @@ import numpy as np
 from sklearn import neighbors
 import pandas as pd
 from sklearn import neighbors
+from pandas.tests.io.msgpack.test_format import testArray
 
 def test_run():
     
@@ -33,11 +34,22 @@ def test_run():
     testX = data_frame.iloc[:,0:-1].truncate(before='2013-01-01')
     testY = data_frame.iloc[:,0:1].truncate(before='2013-01-01')
     
+    #print(trainX)
+    #print(trainY)
+    #print(testX)
+    #print(testY)
+    
+    
     # KNN training
     n_neighbors = 5
     knn = neighbors.KNeighborsRegressor(n_neighbors, weights='uniform')
     predictedY = knn.fit(trainX, trainY).predict(testX)
+
+    testY = np.array(testY).ravel()
     
+    print("The accuracy:")
+    print(sum(abs(predictedY-testY))/len(testY))
+     
     dateRange=testX.index
     plt.plot(dateRange, testY, 'k', dateRange, predictedY, 'r')
     plt.show()
