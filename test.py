@@ -25,7 +25,7 @@ def test_run():
   
   #plt.plot(trainX, trainY, 'k', trainX, y_, 'r')
   
-  #data_frame.plot()
+  data_frame.plot()
   plt.show()
     
 if __name__ == '__main__':
