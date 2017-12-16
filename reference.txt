@@ -1,0 +1,16 @@
+https://github.com/arwarner/machine-learning-for-trading
+https://github.com/ha2emnomer/Deep-Trading
+
+#neural network
+https://github.com/sunggeunkim/Machine-Learning-Trading
+
+#scikit learning API
+http://scikit-learn.org/stable/modules/classes.html#module-sklearn.neighbors
+##preprocessing data
+http://scikit-learn.org/stable/modules/preprocessing.html
+
+#Machine Learning: Python
+https://machine-learning-python.kspax.io/Neural_Networks/plot_mnist_filters.html
+
+#Test score
+https://zh.wikipedia.org/wiki/%E5%86%B3%E5%AE%9A%E7%B3%BB%E6%95%B0
