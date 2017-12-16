@@ -1,7 +1,7 @@
 from data_frame import get_data_frame
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import neighbors, neural_network
+from sklearn import neighbors, neural_network, svm, linear_model, tree
 import pandas as pd
 
 def test_run():
@@ -57,6 +57,22 @@ def test_run():
     predictY_ann = ann.fit(trainX, trainY).predict(testX)
     score_ann = ann.score(trainX, trainY)
     
+    # SVM training
+    svm_method = svm.SVR()
+    predictY_svm = svm_method.fit(trainX, trainY).predict(testX)
+    score_svm = svm_method.score(trainX, trainY)
+    
+    
+    # linear regression training
+    linear_method = linear_model.LinearRegression()
+    predictY_linear = linear_method.fit(trainX, trainY).predict(testX)
+    score_linear = linear_method.score(trainX, trainY)
+    
+    # Decision tree training
+    deci_tree_method = tree.DecisionTreeRegressor()
+    predictY_deci = deci_tree_method.fit(trainX, trainY).predict(testX)
+    score_deci = deci_tree_method.score(trainX, trainY)
+    
     # print data frame
     #print(trainX)
     #print(trainY)
@@ -66,12 +82,19 @@ def test_run():
     # print accuracy
     print("KNN accuracy:"+str(score_knn))
     print("ANN accuracy:"+str(score_ann))
+    print("SVM accuracy:"+str(score_svm))
+    print("Linear Regression accuracy:"+str(score_linear))
+    print("Decision Tree accuracy:"+str(score_deci))
+    
     
     # build data plot frame
     data_frame_plot = pd.DataFrame(index = testX.index)
     data_frame_plot['actual value'] = testY
-    data_frame_plot['KNN predicted value'] = predictY_knn
-    data_frame_plot['ANN predicted value'] = predictY_ann
+    #data_frame_plot['KNN predicted value'] = predictY_knn
+    #data_frame_plot['ANN predicted value'] = predictY_ann
+    #data_frame_plot['SVM predicted value'] = predictY_svm
+    data_frame_plot['Linear Regression predicted value'] = predictY_linear
+    #data_frame_plot['Decision Tree predicted value'] = predictY_deci
     
     # plot figure
     data_frame_plot.plot()
