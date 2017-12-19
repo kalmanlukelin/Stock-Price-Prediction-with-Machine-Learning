@@ -1,4 +1,4 @@
-from data_frame import get_data_frame
+from data_frame import get_data_frame, get_manual_data_frame
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import neighbors, neural_network, svm, linear_model, tree
@@ -7,42 +7,18 @@ import pandas as pd
 def test_run():
     #get stock value
     start_date = '2012-01-01' #'2012-01-01'
-    end_date = '2014-01-01' #'2014-01-01'
-    data_frame = get_data_frame('IBM', start_date, end_date, dropna=False)
-    data_frame['IBM'] = data_frame['IBM'].fillna(method='ffill')
-    data_frame['IBM'] = data_frame['IBM'].fillna(method='bfill')
-    
-    # build index
-    data_frame = data_frame.rename(index=str, columns={'IBM':'actual value'})
-    dateIndex = [i.replace('00:00:00','') for i in data_frame.index]
-    data_frame.index = dateIndex
-    #data_frame['actual value'] = data_frame['IBM']
-    #del(data_frame['IBM'])
-    
-    # build indicator database
-    rolling_mean = data_frame['actual value'].rolling(window=5,center=False).mean()
-    data_frame['bb_value'] = (data_frame['actual value'] - rolling_mean) / (data_frame['actual value'].rolling(window=5,center=False).std() * 2) 
-    data_frame['momentum'] = (data_frame['actual value']/data_frame['actual value'].shift(periods = -5)) - 1
-    data_frame['volatility'] = ((data_frame['actual value']/data_frame['actual value'].shift(periods = -1)) - 1).rolling(window=5,center=False).std()
-    data_frame['value to predict'] = data_frame['actual value'].shift(periods = -5)
-    data_frame = data_frame.dropna(axis=0, how='any')
-    
-    #drop infinite numbers after calculation
-    data_frame = data_frame.replace([np.inf, -np.inf], np.nan)
-    data_frame = data_frame.fillna(method='ffill')
+    end_date = '2013-12-31' #'2014-01-01'
+    stock_frame = get_manual_data_frame('IBM', start_date, end_date)
     
     # get training data
-    trainX = data_frame.iloc[:,0:-1].truncate(after='2012-12-31')
-    trainY = data_frame.iloc[:,-1].truncate(after='2012-12-31')
+    train_end_date='2012-12-31'
+    trainX = stock_frame.iloc[:,0:-1].truncate(after=train_end_date)
+    trainY = stock_frame.iloc[:,-1].truncate(after=train_end_date)
     
-    # build test database
-    test_data_frame = data_frame.iloc[:,0:-1].truncate(before='2013-01-01')
-    test_data_frame['value to predict'] = data_frame.iloc[:,0:1].shift(periods = -5).truncate(before='2013-01-01')
-    test_data_frame = test_data_frame.dropna(axis=0, how='any')
-    
-    #get test data
-    testX = test_data_frame.iloc[:,0:-1]
-    testY = test_data_frame.iloc[:,-1]
+    # get test data
+    test_start_date='2013-01-01'
+    testX = stock_frame.iloc[:,0:-1].truncate(before=test_start_date, after=end_date)
+    testY = stock_frame.iloc[:,-1].truncate(before=test_start_date, after=end_date)
     testY = np.array(testY).ravel()
     
     # Miscellaneous machine learning methods. Test score means the correlation between training data and target data, so it's the smaller the better.
@@ -86,15 +62,14 @@ def test_run():
     print("Linear Regression accuracy:"+str(score_linear))
     print("Decision Tree accuracy:"+str(score_deci))
     
-    
     # build data plot frame
     data_frame_plot = pd.DataFrame(index = testX.index)
     data_frame_plot['actual value'] = testY
-    #data_frame_plot['KNN predicted value'] = predictY_knn
-    #data_frame_plot['ANN predicted value'] = predictY_ann
-    #data_frame_plot['SVM predicted value'] = predictY_svm
+    data_frame_plot['KNN predicted value'] = predictY_knn
+    data_frame_plot['ANN predicted value'] = predictY_ann
+    data_frame_plot['SVM predicted value'] = predictY_svm
     data_frame_plot['Linear Regression predicted value'] = predictY_linear
-    #data_frame_plot['Decision Tree predicted value'] = predictY_deci
+    data_frame_plot['Decision Tree predicted value'] = predictY_deci
     
     # plot figure
     data_frame_plot.plot()
