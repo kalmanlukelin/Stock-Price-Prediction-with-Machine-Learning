@@ -15,6 +15,9 @@ def get_data_frame(symbol, start_date, end_date):
     data_frame = data_frame.fillna(method='ffill')
     data_frame = data_frame.fillna(method='bfill')
     
+    data_frame['value to predict'] = data_frame['Adj Close'].shift(periods = -5)
+    data_frame = data_frame.dropna(axis=0, how='any')
+    
     return data_frame
 
 # data frame with manual indicators 
@@ -51,8 +54,8 @@ def test_run():
     start_date = '2008-01-01'
     end_date = '2014-01-31'
     
-    #data_frame = get_data_frame('IBM', start_date, end_date)
-    data_frame = get_manual_data_frame('IBM', start_date, end_date)
+    data_frame = get_data_frame('IBM', start_date, end_date)
+    #data_frame = get_manual_data_frame('IBM', start_date, end_date)
     print(data_frame)
   
 if __name__ == '__main__':
