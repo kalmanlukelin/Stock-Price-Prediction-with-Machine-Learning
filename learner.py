@@ -1,7 +1,7 @@
 from data_frame import get_data_frame, get_manual_data_frame
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import neighbors, neural_network, svm, linear_model, tree
+from sklearn import neighbors, neural_network, svm, linear_model, tree, ensemble
 import pandas as pd
 
 def plot_figure(data, separate=False):
@@ -17,6 +17,7 @@ def test_run():
     stock_frame = get_manual_data_frame('IBM', start_date, end_date)
     #stock_frame = get_data_frame('IBM', start_date, end_date)
     
+    print(stock_frame)
     # get training data
     train_end_date='2012-12-31'
     trainX = stock_frame.iloc[:,0:-1].truncate(after=train_end_date)
@@ -64,9 +65,18 @@ def test_run():
     testY_Deci = DeciTree.predict(testX)
     trainY_Deci = DeciTree.predict(trainX)
     
-    # hybrid
-    testY_hybrid = (testY_KNN+testY_MLP+testY_SVM+testY_LinReg+testY_Deci)/5
-    trainY_hybrid = (trainY_KNN+trainY_MLP+trainY_SVM+trainY_LinReg+trainY_Deci)/5
+    # Ransom forest training
+    RanF = ensemble.RandomForestRegressor()
+    RanF = RanF.fit(trainX, trainY)
+    score_RanF = RanF.score(trainX, trainY)
+    testY_RanF = RanF.predict(testX)
+    trainY_RanF = RanF.predict(trainX)
+    
+    # Ensemble
+    testY_ensem_tmp = [testY_KNN, testY_MLP, testY_LinReg, testY_RanF]
+    trainY_ensem_tmp = [trainY_KNN, trainY_MLP, trainY_LinReg, trainY_RanF]
+    testY_ensem = sum(testY_ensem_tmp)/len(testY_ensem_tmp)
+    trainY_ensem = sum(trainY_ensem_tmp)/len(trainY_ensem_tmp)
     
     # print training accuracy
     print("Training accuracy")
@@ -75,6 +85,7 @@ def test_run():
     print("SVM accuracy:"+str(score_SVM))
     print("Linear Regression accuracy:"+str(score_LinReg))
     print("Decision Tree accuracy:"+str(score_Deci))
+    print("Random Forest accuracy:"+str(score_RanF))
     print("")
     
     #print prediction accuracy
@@ -84,31 +95,36 @@ def test_run():
     print("SVM accuracy:"+str(np.corrcoef(testY, testY_SVM)[1,0]))
     print("Linear Regression accuracy:"+str(np.corrcoef(testY, testY_LinReg)[1,0]))
     print("Decision Tree accuracy:"+str(np.corrcoef(testY, testY_Deci)[1,0]))
-    print("Hybrid accuracy:"+str(np.corrcoef(testY, testY_hybrid)[1,0]))
+    print("Random Forest accuracy:"+str(np.corrcoef(testY, testY_RanF)[1,0]))
+    print("Ensemble accuracy:"+str(np.corrcoef(testY, testY_ensem)[1,0]))
     
     # build training data frame 
     train_data_frame = pd.DataFrame(index = trainX.index)
-    train_data_frame['actual value'] = trainY
-    train_data_frame['KNN predicted value'] = trainY_KNN
-    train_data_frame['MLP predicted value'] = trainY_MLP
-    train_data_frame['SVM predicted value'] = trainY_SVM
-    train_data_frame['Linear Regression predicted value'] = trainY_LinReg
-    train_data_frame['Decision Tree predicted value'] = trainY_Deci
-    train_data_frame['Hybrid predicted value'] = trainY_hybrid
+    train_data_frame['Actual value'] = trainY
+    train_data_frame['Predicted value - KNN'] = trainY_KNN
+    train_data_frame['Predicted value - MLP'] = trainY_MLP
+    train_data_frame['Predicted value - SVM'] = trainY_SVM
+    train_data_frame['Predicted value - Linear Regression'] = trainY_LinReg
+    train_data_frame['Predicted value - Decision Tree '] = trainY_Deci
+    train_data_frame['Predicted value - Random Forest '] = trainY_RanF
+    train_data_frame['Predicted value - Ensemble '] = trainY_ensem
     
     # build test data frame
     test_data_frame = pd.DataFrame(index = testX.index)
-    test_data_frame['actual value'] = testY
-    test_data_frame['KNN predicted value'] = testY_KNN
-    test_data_frame['MLP predicted value'] = testY_MLP
-    test_data_frame['SVM predicted value'] = testY_SVM
-    test_data_frame['Linear Regression predicted value'] = testY_LinReg
-    test_data_frame['Decision Tree predicted value'] = testY_Deci
-    test_data_frame['Hybrid predicted value'] = testY_hybrid
+    test_data_frame['Actual value'] = testY
+    test_data_frame['Predicted value - KNN'] = testY_KNN
+    test_data_frame['Predicted value - MLP'] = testY_MLP
+    test_data_frame['Predicted value - SVM'] = testY_SVM
+    test_data_frame['Predicted value - Linear Regression'] = testY_LinReg
+    test_data_frame['Predicted value - Decision Tree'] = testY_Deci
+    test_data_frame['Predicted value - Random Forest'] = testY_RanF
+    test_data_frame['Predicted value - Ensemble'] = testY_ensem
     
     # plot figure
     plot_figure(train_data_frame, separate=False)
+    plt.title('Training data')
     plot_figure(test_data_frame, separate=False)
+    plt.title('Test data')
     
     plt.show()
     
