@@ -34,10 +34,18 @@ def get_manual_data_frame(symbol, start_date, end_date):
     data_frame = data_frame.fillna(method='bfill')
     
     # build indicator database
+    # %b value, which measures the effect of Bollinger Bands
     rolling_mean = data_frame['stock value'].rolling(window=5,center=False).mean()
-    data_frame['bb_value'] = (data_frame['stock value'] - rolling_mean) / (data_frame['stock value'].rolling(window=5,center=False).std() * 2) 
-    data_frame['momentum'] = (data_frame['stock value']/data_frame['stock value'].shift(periods = -5)) - 1
-    data_frame['volatility'] = ((data_frame['stock value']/data_frame['stock value'].shift(periods = -1)) - 1).rolling(window=5,center=False).std()
+    rolling_std = data_frame['stock value'].rolling(window=5,center=False).std()
+    data_frame['b_value'] = (data_frame['stock value'] - (rolling_mean - rolling_std * 2)) / (rolling_std * 4) 
+    
+    # measures the direction the price changes
+    data_frame['momentum'] = (data_frame['stock value']/data_frame['stock value'].shift(periods = 5)) - 1
+    
+    # measures how intensely the stock price is fluctuating
+    data_frame['volatility'] = ((data_frame['stock value']/data_frame['stock value'].shift(periods = 1)) - 1).rolling(window=5,center=False).std()
+    
+    # value to predict
     data_frame['value to predict'] = data_frame['stock value'].shift(periods = -5)
     
     # some values will become nan after calculation, and I drop those rows
@@ -54,8 +62,8 @@ def test_run():
     start_date = '2008-01-01'
     end_date = '2014-01-31'
     
-    data_frame = get_data_frame('IBM', start_date, end_date)
-    #data_frame = get_manual_data_frame('IBM', start_date, end_date)
+    #data_frame = get_data_frame('IBM', start_date, end_date)
+    data_frame = get_manual_data_frame('IBM', start_date, end_date)
     print(data_frame)
   
 if __name__ == '__main__':
