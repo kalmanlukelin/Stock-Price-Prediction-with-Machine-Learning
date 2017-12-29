@@ -31,14 +31,14 @@ def test_run():
     
     # Miscellaneous machine learning methods. Test score means the correlation between training data and target data, so it's the smaller the better.
     # KNN training
-    KNN = neighbors.KNeighborsRegressor(n_neighbors=5, weights='uniform')
+    KNN = neighbors.KNeighborsRegressor(n_neighbors=5, weights='distance')
     KNN = KNN.fit(trainX, trainY)
     score_KNN = KNN.score(trainX, trainY)
     trainY_KNN = KNN.predict(trainX)
     testY_KNN = KNN.predict(testX)
     
     # MLP training
-    MLP = neural_network.MLPRegressor(hidden_layer_sizes=(10, 5), max_iter=3000) # hidden_layer_sizes=(first layer nodes, second layer nodes, ...) 10,5
+    MLP = neural_network.MLPRegressor(hidden_layer_sizes=(5,), max_iter=3000) # hidden_layer_sizes=(first layer nodes, second layer nodes, ...)
     MLP = MLP.fit(trainX, trainY)
     score_MLP = MLP.score(trainX, trainY)
     trainY_MLP = MLP.predict(trainX)
@@ -134,6 +134,5 @@ def test_run():
 
     plt.show()
     
-    print(stock_frame)
 if __name__ == '__main__':
   test_run()
