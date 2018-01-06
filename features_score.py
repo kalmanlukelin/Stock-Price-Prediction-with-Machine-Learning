@@ -1,7 +1,6 @@
 from data_frame import get_self_made_data_frame
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn import neighbors, neural_network, svm, linear_model, tree, ensemble, discriminant_analysis
 from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import chi2
 import pandas as pd
