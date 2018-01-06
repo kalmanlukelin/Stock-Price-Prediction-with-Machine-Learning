@@ -9,7 +9,7 @@ end_date = '2018-01-01'
 stock_frame = get_self_made_data_frame('IBM', start_date, end_date)
 
 # get volatility and stock value
-stock_frame = stock_frame.loc[:,['Adj Close', 'volatility_20']]
+stock_frame = stock_frame.loc[:,['Adj Close', 'momentum_20']]
 
 #plot
 stock_frame.plot(subplots=True)

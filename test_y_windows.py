@@ -13,22 +13,22 @@ def plot_figure(data, separate=False, sub_plot=False):
 def test_run():
     
     KNN_score, MLP_score, SVM_score, RanF_score = [], [], [], [] 
-    y_windows=30
+    y_windows=50
     
     for i in range(y_windows):
         #get stock value
-        start_date = '2007-01-01' #'2012-01-01'
-        end_date = '2016-01-01' #'2014-01-01'
+        start_date = '2015-01-01' #'2012-01-01'
+        end_date = '2018-01-01' #'2014-01-01'
         stock_frame = get_self_made_data_frame('IBM', start_date, end_date, y_windows=i)
     
         # get training data
         train_start_date=start_date
-        train_end_date='2014-12-31'
+        train_end_date='2016-12-31'
         trainX = stock_frame.iloc[:,0:-1].truncate(before=train_start_date, after=train_end_date)
         trainY = stock_frame.iloc[:,-1].truncate(before=train_start_date, after=train_end_date)
     
         # get test data
-        test_start_date='2015-01-01'
+        test_start_date='2017-01-01'
         test_end_date=end_date
         testX = stock_frame.iloc[:,0:-1].truncate(before=test_start_date, after=test_end_date)
         testY = stock_frame.iloc[:,-1].truncate(before=test_start_date, after=test_end_date)
@@ -51,10 +51,10 @@ def test_run():
         RanF = RanF.fit(trainX, trainY)
         
         #append scores
-        KNN_score.append(KNN.score(trainX, trainY))
-        MLP_score.append(MLP.score(trainX, trainY))
-        SVM_score.append(SVM_.score(trainX, trainY))
-        RanF_score.append(RanF.score(trainX, trainY))
+        KNN_score.append(KNN.score(testX, testY))
+        MLP_score.append(MLP.score(testX, testY))
+        SVM_score.append(SVM_.score(testX, testY))
+        RanF_score.append(RanF.score(testX, testY))
     
     # print training data accuracy
     KNN_score=np.array(KNN_score)
@@ -82,6 +82,9 @@ def test_run():
     plt.plot(SVM_score,label="SVM")
     plt.plot(RanF_score,label="RanF")
     plt.legend()
+    plt.title('Long-Term Prediction Accuracy')
+    plt.ylabel('Accuracy')
+    plt.xlabel('Time Windows (days)')
     plt.axis((0,y_windows,0.6,1.1))
     plt.show()
 
