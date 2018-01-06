@@ -1,3 +1,4 @@
+#referece github
 https://github.com/arwarner/machine-learning-for-trading
 https://github.com/ha2emnomer/Deep-Trading
 
