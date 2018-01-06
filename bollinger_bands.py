@@ -45,10 +45,10 @@ def test_run():
   data_frame = get_data_frame(symbol, start_date, end_date)
   ax = data_frame.plot(title='Bollinger bands', label=symbol)
   
-  rm = rolling_mean(data_frame, 'stock value', window = window)
+  rm = rolling_mean(data_frame, 'Adj Close', window = window)
   rm.plot(label='Rolling mean', ax=ax)
   
-  rstd = rolling_std(data_frame, 'stock value', window = window)
+  rstd = rolling_std(data_frame, 'Adj Close', window = window)
   
   upper_band, lower_band = bollinger_bands(rm, rstd)
   
