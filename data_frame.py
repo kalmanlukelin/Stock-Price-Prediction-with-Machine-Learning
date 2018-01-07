@@ -63,8 +63,8 @@ def get_self_made_data_frame(symbol, start_date, end_date, y_windows=0):
     data_frame['volatility_40'] = ((data_frame['Adj Close']/data_frame['Adj Close'].shift(periods = 1)) - 1).rolling(window=40,center=False).std()
     
     # momentum
-    data_frame['momentum_20'] = data_frame['Adj Close'] - data_frame['Adj Close'].shift(periods = 20)
-    data_frame['momentum_40'] = data_frame['Adj Close'] - data_frame['Adj Close'].shift(periods = 40)
+    #data_frame['momentum_20'] = data_frame['Adj Close'] - data_frame['Adj Close'].shift(periods = 20)
+    #data_frame['momentum_40'] = data_frame['Adj Close'] - data_frame['Adj Close'].shift(periods = 40)
     
     # build indicator database
     # %b value, which measures the effect of Bollinger Bands
