@@ -17,7 +17,7 @@ def rolling_mean(data_frame, symbol, window):
   return data_frame[symbol].rolling(window, center=False).mean()
 
 def options():
-  start_date = '2016-01-01'
+  start_date = '2015-01-01'
   end_date = '2018-01-01'
   symbol = 'IBM'
   window = 20

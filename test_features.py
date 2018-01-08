@@ -8,8 +8,8 @@ def test_run():
      
     #get stock value
     start_date = '2015-01-01'
-    end_date = '2018-01-01' 
-    stock_frame = get_self_made_data_frame('IBM', start_date, end_date, y_windows=15)
+    end_date = '2018-01-01'
+    stock_frame = get_self_made_data_frame('IBM', start_date, end_date, y_windows=40)
     
     num_feaures=len(stock_frame.columns)
     
