@@ -29,12 +29,14 @@ python test_y_windows.py
 ## Executive summary
 
 ### Bad prediction accuracy with the sign of difference between tomorrow’s stock price and that of today. The following is the accuracy for each methods measured with the scale 0-1.
+
 * KNN: 0.57
 * MLP: 0.65
 * SVM: 0.65
 * RanF: 0.59
 
 ### Great prediction accuracy with the sign of difference between tomorrow’s stock price and that of 40 days ago.
+
 * KNN: 0.87
 * MLP: 0.95
 * SVM: 0.90
@@ -42,4 +44,14 @@ python test_y_windows.py
 
 ## Result
 
-![IMAGE](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_y_windows.png)
+### Accuracy versus Time 
+
+![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_y_windows.png)
+
+### Effect of features
+
+Sign of difference between tomorrow’s stock price and that of today.
+![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_0.png)
+
+Sign of difference between tomorrow’s stock price and that of 40 days ago.
+![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_40.png)
