@@ -41,3 +41,5 @@ python test_y_windows.py
 * RanF: 0.96
 
 ## Result
+
+![IMAGE](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_y_windows.png)
