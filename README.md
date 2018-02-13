@@ -28,14 +28,14 @@ python test_y_windows.py
 
 ## Executive summary
 
-### Bad prediction accuracy with the sign of difference between tomorrow’s stock price and that of today. The following is the accuracy for each methods measured with by scale 0-1.
+Bad prediction accuracy with the sign of difference between tomorrow’s stock price and that of today. The following is the accuracy for each methods measured with by scale 0-1.
 
 * KNN: 0.57
 * MLP: 0.65
 * SVM: 0.65
 * RanF: 0.59
 
-### Great prediction accuracy with the sign of difference between tomorrow’s stock price and that of 40 days ago.
+Great prediction accuracy with the sign of difference between tomorrow’s stock price and that of 40 days ago.
 
 * KNN: 0.87
 * MLP: 0.95
@@ -50,8 +50,21 @@ python test_y_windows.py
 
 ### Effect of features
 
-#### Sign of difference between tomorrow’s stock price and that of today.
+Sign of difference between tomorrow’s stock price and that of today.
 ![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_0.png)
 
-#### Sign of difference between tomorrow’s stock price and that of 40 days ago.
+Sign of difference between tomorrow’s stock price and that of 40 days ago.
 ![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_40.png)
+
+## Python modules used
+
+* numpy
+* scikit-learn
+* pandas
+* matplotlib
+
+## Reference
+
+* Yuqing Dai, Yuning Zhang, Machine Learning in Stock Price Trend Forecasting
+* Georgia Tech, Machine Learning for Trading
+* Xin Guo, How can machine learning help stock investment?
