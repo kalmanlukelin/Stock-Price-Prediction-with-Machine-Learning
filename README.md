@@ -28,7 +28,7 @@ python test_y_windows.py
 
 ## Executive summary
 
-Bad prediction accuracy with the sign of difference between tomorrow’s stock price and that of today. The following is the accuracy for each methods measured with by scale 0-1.
+Bad prediction accuracy with the sign of difference between tomorrow’s stock price and that of today. The following is the accuracy for each methods measured by scale 0-1.
 
 * KNN: 0.57
 * MLP: 0.65
