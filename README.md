@@ -1,6 +1,13 @@
 # Intelligent Computing Algorithm Project
 
-This project is to make prediction for stocks using supervised learning. I choose some financial indicators such as bollinger bands, volitiliy, and momentum as featuers to predict whether tomorrows's stock price will rise or fall.
+This project is to make prediction for stocks using supervised learning with Python. I choose some financial indicators such as bollinger bands, volitiliy, and momentum as featuers to predict whether tomorrows's stock price will rise or fall.
+
+## Python modules used
+
+* numpy
+* scikit-learn
+* pandas
+* matplotlib
 
 ## Running the project
 
@@ -19,7 +26,7 @@ To see the prediction accuray vs time windows t. (time windows t is to see the r
 python test_y_windows.py
 ```
 
-## Supervied Learning Methods Used
+## Supervied learning methods Used
 
 * K-nearest neighbors (KNN)
 * Multilayer perceptron (MLP)
@@ -55,13 +62,6 @@ Sign of difference between tomorrow’s stock price and that of today.
 
 Sign of difference between tomorrow’s stock price and that of 40 days ago.
 ![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_40.png)
-
-## Python modules used
-
-* numpy
-* scikit-learn
-* pandas
-* matplotlib
 
 ## Reference
 
