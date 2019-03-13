@@ -1,4 +1,4 @@
-# Intelligent Computing Algorithm Project
+# Stock prediction with machine learning
 This project is to make prediction for stocks using supervised learning like K-nearest neighbors (KNN), Multilayer perceptron (MLP), Support vector machine (SVM), and Random forest (RF). I choose some financial indicators such as bollinger bands, volitiliy, and momentum as featuers to predict whether tomorrows's stock price will rise or fall.
 
 ## Running the project
