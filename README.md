@@ -22,24 +22,14 @@ Bad prediction accuracy with the sign of difference between tomorrow’s stock p
 * KNN: 0.57
 * MLP: 0.65
 * SVM: 0.65
-* RanF: 0.59
+* RF: 0.59
 
 Great prediction accuracy with the sign of difference between tomorrow’s stock price and that of 40 days ago.
 
 * KNN: 0.87
 * MLP: 0.95
 * SVM: 0.90
-* RanF: 0.96
-
-![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_y_windows.png)
-
-Sign of difference between tomorrow’s stock price and that of today.
-![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_0.png)
-
-Sign of difference between tomorrow’s stock price and that of 40 days ago.
-![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_40.png)
-
-As a result, features would have more effects on the sign of difference between tomorrow's stock price and that of 40 day age.
+* RF: 0.96
 
 ## Built with
 * numpy
