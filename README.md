@@ -31,15 +31,15 @@ Great prediction accuracy with the sign of difference between tomorrow’s stock
 * SVM: 0.90
 * RanF: 0.96
 
-##### Accuracy versus Time 
 ![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_y_windows.png)
 
-##### Effect of features
 Sign of difference between tomorrow’s stock price and that of today.
 ![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_0.png)
 
 Sign of difference between tomorrow’s stock price and that of 40 days ago.
 ![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_40.png)
+
+As a result, features would effect more on the sign of difference between tomorrow's stock price and that of 40 day age.
 
 ## Built with
 * numpy
