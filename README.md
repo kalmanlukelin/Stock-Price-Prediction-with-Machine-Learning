@@ -39,7 +39,7 @@ Sign of difference between tomorrow’s stock price and that of today.
 Sign of difference between tomorrow’s stock price and that of 40 days ago.
 ![Image](https://github.com/LukeLinn/ICA_project/blob/master/result_pictures/test_features_40.png)
 
-As a result, features would effect more on the sign of difference between tomorrow's stock price and that of 40 day age.
+As a result, features would have more effects on the sign of difference between tomorrow's stock price and that of 40 day age.
 
 ## Built with
 * numpy
